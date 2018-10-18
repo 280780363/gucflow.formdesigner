@@ -1,20 +1,20 @@
 <template>
-    <div>
-        <table border="0">
-            <colgroup>
-                <col style="width: 50px;" />
-                <col v-for="col in tableData.layoutData.cols" :key="col" :style="{width:col.width}" />
-            </colgroup>
-            <thead>
-                <th></th>
-                <th v-for="(col,index) in tableData.layoutData.cols" :key="col">{{getColHeaderTitle(index+1)}}</th>
-            </thead>
-            <tr v-for="(row,index) in tableData.layoutData.rows" :key="row" :style="{height:row.height}">
-                <td>{{index}}</td>
-                <th v-for="(col) in tableData.layoutData.cols" :key="col"></th>
-            </tr>
-        </table>
-    </div>
+  <div>
+    <table border="0">
+      <colgroup>
+        <col style="width: 50px;" />
+        <col v-for="col in tableData.layou.cols" :key="col.title" :style="{width:col.width+'px'}" />
+      </colgroup>
+      <thead>
+        <th></th>
+        <th v-for="col in tableData.layout.cols" :key="col">{{col.title}}</th>
+      </thead>
+      <tr v-for="row in tableData.layout.rows" :key="row.title" :style="{height:row.height+'px'}">
+        <td>{{row.title}}</td>
+        <th v-for="(col) in tableData.layout.cols" :key="col"></th>
+      </tr>
+    </table>
+  </div>
 </template>
 <script>
 export default {
@@ -24,62 +24,78 @@ export default {
       enums: {},
       tableData: {
         // 布局数据
-        layoutData: {
+        layout: {
           cols: [
             {
-              width: "50px"
+              title: "A",
+              width: 50
             },
             {
-              width: "50px"
+              title: "B",
+              width: 50
             },
             {
-              width: "50px"
+              title: "C",
+              width: 50
             },
             {
-              width: "50px"
+              title: "D",
+              width: 50
             },
             {
-              width: "50px"
+              title: "E",
+              width: 50
             },
             {
-              width: "50px"
+              title: "F",
+              width: 50
             },
             {
-              width: "50px"
+              title: "H",
+              width: 50
             },
             {
-              width: "50px"
+              title: "I",
+              width: 50
             }
           ],
           rows: [
             {
-              height: "24px"
+              title: "1",
+              height: 24
             },
             {
-              height: "24px"
+              title: "2",
+              height: 24
             },
             {
-              height: "24px"
+              title: "3",
+              height: 24
             },
             {
-              height: "24px"
+              title: "4",
+              height: 24
             },
             {
-              height: "24px"
+              title: "5",
+              height: 24
             },
             {
-              height: "24px"
+              title: "6",
+              height: 24
             },
             {
-              height: "24px"
+              title: "7",
+              height: 24
             },
             {
-              height: "24px"
+              title: "8",
+              height: 24
             }
           ]
         },
         // 单元格数据
-        cellData: [
+        cells: [
           {
             row: 1,
             col: 1,
