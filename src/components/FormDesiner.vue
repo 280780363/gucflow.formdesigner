@@ -11,7 +11,7 @@
       </thead>
       <tr v-for="row in tableData.layout.rows" :key="row.title" :style="{height:row.height+'px'}">
         <td>{{row.title}}</td>
-        <th v-for="(col) in tableData.layout.cols" :key="col"></th>
+        <td v-for="(col) in tableData.layout.cols" :key="col.title">{{col.title}}{{row.title}}</td>
       </tr>
     </table>
   </div>
@@ -95,13 +95,35 @@ export default {
           ]
         },
         // 单元格数据
-        cells: [
+        rows: [
           {
             row: 1,
             col: 1,
+            // 合并区域
+            mergeArea: {
+              beginCol: 1,
+              beginRow: 1,
+              endCol: 3,
+              endRow: 3
+            }
+          }
+        ],
+        // 合并的单元格
+        mergeCells: [
+          {
+            beginCol: 1,
+            beginRow: 1,
+            endCol: 3,
+            endRow: 3,
             content: {
               type: "text",
               value: "aaaa"
+            },
+            border: {
+              top: null,
+              bottom: null,
+              left: null,
+              right: null
             }
           }
         ]
@@ -116,6 +138,15 @@ export default {
     mergeCell() {},
     resizeColWidth() {},
     resizeRowHeight() {},
+    getMergeArea(col, row) {
+      return this.mergeArea.find(
+        r =>
+          col >= r.beginCol &&
+          col <= r.endCol &&
+          row >= r.beginRow &&
+          row <= r.endRow
+      );
+    },
     getColHeaderTitle(colIndex) {
       let last = String.fromCharCode((colIndex % 26 || 26) + 64);
       let i = Math.floor((colIndex - 1) / 26);
