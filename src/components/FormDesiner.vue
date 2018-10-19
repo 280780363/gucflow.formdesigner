@@ -17,11 +17,23 @@
   </div>
 </template>
 <script>
+// 横向居中方式
+let align = {
+  left: "left",
+  center: "center",
+  right: "right"
+};
+//纵向居中方式
+let vertical_align = {
+  top: "top",
+  middle: "middle",
+  bottom: "bottom"
+};
 export default {
   components: {},
   data() {
     return {
-      enums: {},
+      enums: { align, vertical_align },
       tableData: {
         // 布局数据
         layout: {
@@ -95,17 +107,12 @@ export default {
           ]
         },
         // 单元格数据
-        rows: [
+        cells: [
           {
             row: 1,
             col: 1,
-            // 合并区域
-            mergeArea: {
-              beginCol: 1,
-              beginRow: 1,
-              endCol: 3,
-              endRow: 3
-            }
+            style: {},
+            content: {}
           }
         ],
         // 合并的单元格
@@ -119,11 +126,16 @@ export default {
               type: "text",
               value: "aaaa"
             },
-            border: {
-              top: null,
-              bottom: null,
-              left: null,
-              right: null
+            style: {
+              border: {
+                top: null,
+                bottom: null,
+                left: null,
+                right: null
+              },
+              vertical_align: "",
+              align: "",
+              css: ""
             }
           }
         ]
@@ -136,6 +148,8 @@ export default {
     delCol() {},
     delRow() {},
     mergeCell() {},
+    clear() {},
+    cancelMergeCell() {},
     resizeColWidth() {},
     resizeRowHeight() {},
     getMergeArea(col, row) {
